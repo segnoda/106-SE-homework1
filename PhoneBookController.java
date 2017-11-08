@@ -13,6 +13,7 @@ public class PhoneBookController {
 	public static String QUIT_COMMAND = "quit";
 	public static String ADD_COMMAND = "add";
 	public static String SEARCH_COMMAND = "search";
+	public static String DELETE_COMMAND = "delete";
 
 	// A private field used to track user's input of person name
 	private String name;
@@ -30,6 +31,9 @@ public class PhoneBookController {
 				}
 				else if (userInput.equals(SEARCH_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.SEARCH_STATE);
+				}
+				else if (userInput.equals(DELETE_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.DELETE_STATE);
 				}
 				else if (userInput.equals(QUIT_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
@@ -50,6 +54,10 @@ public class PhoneBookController {
 				phonebookmodel.searchPhoneNumber(userInput);
 				phonebookmodel.setState(PhoneBookModel.SEARCH_RESULT_STATE);
 			}
+			else if (currentState.equals(PhoneBookModel.DELETE_STATE)) {
+				phonebookmodel.deletePhoneNumber(userInput);
+				phonebookmodel.setState(PhoneBookModel.DELETE_RESULT_STATE);
+			}
 			else if (currentState.equals(PhoneBookModel.SEARCH_RESULT_STATE) || currentState.equals(PhoneBookModel.ERROR_STATE)) {
 				if (userInput.equals(START_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
@@ -60,7 +68,16 @@ public class PhoneBookController {
 				else {
 					phonebookmodel.setState(PhoneBookModel.ERROR_STATE);
 				}
-			} }
+			}
+			else if (currentState.equals(PhoneBookModel.DELETE_RESULT_STATE)) {
+				if (userInput.equals(START_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
+				}
+				else if (userInput.equals(QUIT_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
+				}
+			}
+		}
 		else {
 			phonebookmodel.setState(PhoneBookModel.ERROR_STATE);
 		}

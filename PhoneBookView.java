@@ -19,12 +19,15 @@ public class PhoneBookView {
 	public static String ADD_NAME_Q = "Please enter the exact person name";
 	public static String ADD_NUMBER_Q = "Please enter the phone number";
 	public static String SEARCH_Q = "Please enter the exact person name.";
+	public static String DELETE_Q = "Please enter the exact person name.";
 	public static String IDLE_Q =
 		"Please enter your choice of action, \""
 		+ PhoneBookController.ADD_COMMAND
 		+ "\" to add a phone entry or \""
 		+ PhoneBookController.SEARCH_COMMAND
 		+ "\" to search for a phone number or \""
+		+ PhoneBookController.DELETE_COMMAND
+		+ "\" to delete a phone entry or \""
 		+ PhoneBookController.QUIT_COMMAND
 		+ "\" to end the application.";
 	public static String SEARCH_RESULT_Q =
@@ -33,8 +36,20 @@ public class PhoneBookView {
 		+ "\" to do more with the application or \""
 		+ PhoneBookController.QUIT_COMMAND
 		+ "\" to end the application.";
+	public static String DELETE_RESULT_Q =
+		"Phone entry has been deleted. Enter \""
+		+ PhoneBookController.START_COMMAND
+		+ "\" to do more with the application or \""
+		+ PhoneBookController.QUIT_COMMAND
+		+ "\" to end the application.";
 	public static String SEARCH_NOT_FOUND_Q =
-		" Phone number not found. Enter \""
+		"Phone number not found. Enter \""
+		+ PhoneBookController.START_COMMAND
+		+ "\" to do more with the application or \""
+		+ PhoneBookController.QUIT_COMMAND
+		+ "\" to end the application.";
+	public static String DELETE_NOT_FOUND_Q =
+		"Phone entry not found. Enter \""
 		+ PhoneBookController.START_COMMAND
 		+ "\" to do more with the application or \""
 		+ PhoneBookController.QUIT_COMMAND
@@ -80,13 +95,25 @@ public class PhoneBookView {
 		else if (newState.equals(PhoneBookModel.SEARCH_STATE)) {
 			System.out.println(SEARCH_Q);
 		}
+		else if (newState.equals(PhoneBookModel.DELETE_STATE)) {
+			System.out.println(DELETE_Q);
+		}
 		else if (newState.equals(PhoneBookModel.SEARCH_RESULT_STATE)) {
 			String result = phonebookmodel.getSearchResult();
 			if (result == null || result.length() == 0) {
 				System.out.println(SEARCH_NOT_FOUND_Q);
 			}
 			else {
-				System.out.println(result+SEARCH_RESULT_Q);
+				System.out.println(result + SEARCH_RESULT_Q);
+			}
+		}
+		else if (newState.equals(PhoneBookModel.DELETE_RESULT_STATE)) {
+			String result = phonebookmodel.getDeleteResult();
+			if (result == null || result.length() == 0) {
+				System.out.println(DELETE_NOT_FOUND_Q);
+			}
+			else {
+				System.out.println(DELETE_RESULT_Q);
 			}
 		}
 		else if (newState.equals(PhoneBookModel.ERROR_STATE)) {

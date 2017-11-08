@@ -19,14 +19,17 @@ public class PhoneBookModel {
 	public static String ADD_NAME_STATE = "ADD_NAME";
 	public static String ADD_NUMBER_STATE = "ADD_NUMBER";
 	public static String SEARCH_STATE = "SEARCH";
+	public static String DELETE_STATE = "DELETE";
 	public static String IDLE_STATE = "IDLE";
 	public static String SEARCH_RESULT_STATE = "SEARCH_RESULT";
+	public static String DELETE_RESULT_STATE = "DELETE_RESULT";
 	public static String ERROR_STATE = "ERROR";
 	public static String EXIT_STATE = "EXIT";
 
 	// Private fields used to track various model data
 	private String state = IDLE_STATE;
 	private String searchResult = null;
+	private String deleteResult = null;
 	private Hashtable<String,String> phoneBook = null;
 
 	/**
@@ -60,6 +63,21 @@ public class PhoneBookModel {
 	 */
 	public String getSearchResult() {
 		return searchResult;
+	}
+
+	/**
+	 * search the phone number that want to be delete
+	 * @param name
+	 */
+	public void deletePhoneNumber(String name) {
+		deleteResult = (String)phoneBook.remove(name);
+	}
+
+	/**
+	 * return the delete result
+	 */
+	public String getDeleteResult() {
+		return deleteResult;
 	}
 
 	/**
