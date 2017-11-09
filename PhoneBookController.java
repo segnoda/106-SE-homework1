@@ -2,6 +2,7 @@
  * Controller for the phone book application
  *   No sophisticated error handling is implemented
  */
+
 public class PhoneBookController {
 
 	private PhoneBookModel phonebookmodel;
@@ -14,6 +15,7 @@ public class PhoneBookController {
 	public static String ADD_COMMAND = "add";
 	public static String SEARCH_COMMAND = "search";
 	public static String DELETE_COMMAND = "delete";
+	public static String MODIFY_COMMAND = "modify";
 
 	// A private field used to track user's input of person name
 	private String name;
@@ -34,6 +36,9 @@ public class PhoneBookController {
 				}
 				else if (userInput.equals(DELETE_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.DELETE_STATE);
+				}
+				else if (userInput.equals(MODIFY_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.MODIFY_NAME_STATE);
 				}
 				else if (userInput.equals(QUIT_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
@@ -58,6 +63,14 @@ public class PhoneBookController {
 				phonebookmodel.deletePhoneNumber(userInput);
 				phonebookmodel.setState(PhoneBookModel.DELETE_RESULT_STATE);
 			}
+			else if (currentState.equals(PhoneBookModel.MODIFY_NAME_STATE)) {
+				name = userInput;
+				phonebookmodel.setState(PhoneBookModel.MODIFY_NUMBER_STATE); 
+			}
+			else if (currentState.equals(PhoneBookModel.MODIFY_NUMBER_STATE)) {
+				phonebookmodel.modifyAnEntry(name, userInput);
+				phonebookmodel.setState(PhoneBookModel.MODIFY_RESULT_STATE);
+			}
 			else if (currentState.equals(PhoneBookModel.SEARCH_RESULT_STATE) || currentState.equals(PhoneBookModel.ERROR_STATE)) {
 				if (userInput.equals(START_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
@@ -70,6 +83,14 @@ public class PhoneBookController {
 				}
 			}
 			else if (currentState.equals(PhoneBookModel.DELETE_RESULT_STATE)) {
+				if (userInput.equals(START_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
+				}
+				else if (userInput.equals(QUIT_COMMAND)) {
+					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
+				}
+			}
+			else if (currentState.equals(PhoneBookModel.MODIFY_RESULT_STATE)) {
 				if (userInput.equals(START_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
 				}

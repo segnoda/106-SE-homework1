@@ -20,6 +20,8 @@ public class PhoneBookView {
 	public static String ADD_NUMBER_Q = "Please enter the phone number";
 	public static String SEARCH_Q = "Please enter the exact person name.";
 	public static String DELETE_Q = "Please enter the exact person name.";
+	public static String MODIFY_NAME_Q = "Please enter the exact person name.";
+	public static String MODIFY_NUMBER_Q = "Please enter the phone number";
 	public static String IDLE_Q =
 		"Please enter your choice of action, \""
 		+ PhoneBookController.ADD_COMMAND
@@ -28,6 +30,8 @@ public class PhoneBookView {
 		+ "\" to search for a phone number or \""
 		+ PhoneBookController.DELETE_COMMAND
 		+ "\" to delete a phone entry or \""
+		+ PhoneBookController.MODIFY_COMMAND
+		+ "\" to modify a phone entry or \""
 		+ PhoneBookController.QUIT_COMMAND
 		+ "\" to end the application.";
 	public static String SEARCH_RESULT_Q =
@@ -42,6 +46,12 @@ public class PhoneBookView {
 		+ "\" to do more with the application or \""
 		+ PhoneBookController.QUIT_COMMAND
 		+ "\" to end the application.";
+	public static String MODIFY_RESULT_Q =
+		"Phone entry has been modified. Enter \""
+		+ PhoneBookController.START_COMMAND
+		+ "\" to do more with the application or \""
+		+ PhoneBookController.QUIT_COMMAND
+		+ "\" to end the application.";
 	public static String SEARCH_NOT_FOUND_Q =
 		"Phone number not found. Enter \""
 		+ PhoneBookController.START_COMMAND
@@ -49,6 +59,12 @@ public class PhoneBookView {
 		+ PhoneBookController.QUIT_COMMAND
 		+ "\" to end the application.";
 	public static String DELETE_NOT_FOUND_Q =
+		"Phone entry not found. Enter \""
+		+ PhoneBookController.START_COMMAND
+		+ "\" to do more with the application or \""
+		+ PhoneBookController.QUIT_COMMAND
+		+ "\" to end the application.";
+	public static String MODIFY_NOT_FOUND_Q =
 		"Phone entry not found. Enter \""
 		+ PhoneBookController.START_COMMAND
 		+ "\" to do more with the application or \""
@@ -98,6 +114,12 @@ public class PhoneBookView {
 		else if (newState.equals(PhoneBookModel.DELETE_STATE)) {
 			System.out.println(DELETE_Q);
 		}
+		else if (newState.equals(PhoneBookModel.MODIFY_NAME_STATE)) {
+			System.out.println(MODIFY_NAME_Q);
+		}
+		else if (newState.equals(PhoneBookModel.MODIFY_NUMBER_STATE)) {
+			System.out.println(MODIFY_NUMBER_Q);
+		}
 		else if (newState.equals(PhoneBookModel.SEARCH_RESULT_STATE)) {
 			String result = phonebookmodel.getSearchResult();
 			if (result == null || result.length() == 0) {
@@ -114,6 +136,15 @@ public class PhoneBookView {
 			}
 			else {
 				System.out.println(DELETE_RESULT_Q);
+			}
+		}
+		else if (newState.equals(PhoneBookModel.MODIFY_RESULT_STATE)) {
+			String result = phonebookmodel.getModifyResult();
+			if (result == null || result.length() == 0) {
+				System.out.println(MODIFY_NOT_FOUND_Q);
+			}
+			else {
+				System.out.println(MODIFY_RESULT_Q);
 			}
 		}
 		else if (newState.equals(PhoneBookModel.ERROR_STATE)) {

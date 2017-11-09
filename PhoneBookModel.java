@@ -20,6 +20,9 @@ public class PhoneBookModel {
 	public static String ADD_NUMBER_STATE = "ADD_NUMBER";
 	public static String SEARCH_STATE = "SEARCH";
 	public static String DELETE_STATE = "DELETE";
+	public static String MODIFY_NAME_STATE = "MODIFY_NAME";
+	public static String MODIFY_NUMBER_STATE = "MODIFY_NUMBER";
+	public static String MODIFY_RESULT_STATE = "MODIFY_RESULT";
 	public static String IDLE_STATE = "IDLE";
 	public static String SEARCH_RESULT_STATE = "SEARCH_RESULT";
 	public static String DELETE_RESULT_STATE = "DELETE_RESULT";
@@ -30,6 +33,7 @@ public class PhoneBookModel {
 	private String state = IDLE_STATE;
 	private String searchResult = null;
 	private String deleteResult = null;
+	private String modifyResult = null;
 	private Hashtable<String,String> phoneBook = null;
 
 	/**
@@ -78,6 +82,25 @@ public class PhoneBookModel {
 	 */
 	public String getDeleteResult() {
 		return deleteResult;
+	}
+
+	/**
+	 * modify a phone entry
+	 * @param name
+	 * @param number
+	 */
+	public void modifyAnEntry(String name, String number) {
+		modifyResult = (String)phoneBook.get(name);
+		if (modifyResult != null && modifyResult.length() != 0) {
+			phoneBook.put(name, number);
+		}
+	}
+
+	/**
+	 * return the modify result
+	 */
+	public String getModifyResult() {
+		return modifyResult;
 	}
 
 	/**
