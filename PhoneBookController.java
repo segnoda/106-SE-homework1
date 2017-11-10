@@ -71,7 +71,10 @@ public class PhoneBookController {
 				phonebookmodel.modifyAnEntry(name, userInput);
 				phonebookmodel.setState(PhoneBookModel.MODIFY_RESULT_STATE);
 			}
-			else if (currentState.equals(PhoneBookModel.SEARCH_RESULT_STATE) || currentState.equals(PhoneBookModel.ERROR_STATE)) {
+			else if (currentState.equals(PhoneBookModel.SEARCH_RESULT_STATE)
+					|| currentState.equals(PhoneBookModel.ERROR_STATE)
+					|| currentState.equals(PhoneBookModel.DELETE_RESULT_STATE)
+					|| currentState.equals(PhoneBookModel.MODIFY_RESULT_STATE)) {
 				if (userInput.equals(START_COMMAND)) {
 					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
 				}
@@ -80,22 +83,6 @@ public class PhoneBookController {
 				}
 				else {
 					phonebookmodel.setState(PhoneBookModel.ERROR_STATE);
-				}
-			}
-			else if (currentState.equals(PhoneBookModel.DELETE_RESULT_STATE)) {
-				if (userInput.equals(START_COMMAND)) {
-					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
-				}
-				else if (userInput.equals(QUIT_COMMAND)) {
-					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
-				}
-			}
-			else if (currentState.equals(PhoneBookModel.MODIFY_RESULT_STATE)) {
-				if (userInput.equals(START_COMMAND)) {
-					phonebookmodel.setState(PhoneBookModel.IDLE_STATE);
-				}
-				else if (userInput.equals(QUIT_COMMAND)) {
-					phonebookmodel.setState(PhoneBookModel.EXIT_STATE);
 				}
 			}
 		}
